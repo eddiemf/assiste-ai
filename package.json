@@ -1,0 +1,38 @@
+{
+  "name": "assiste-ai",
+  "version": "1.0.0",
+  "description": "You can access at http://assisteai.com.br/",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./app.js localhost 3000",
+    "test": "nodemon --exec 'mocha -R nyan'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddiemf/assiste-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eddiemf/assiste-ai/issues"
+  },
+  "homepage": "https://github.com/eddiemf/assiste-ai#readme",
+  "dependencies": {
+    "bcrypt": "1.0.3",
+    "dotenv": "4.0.0",
+    "express": "4.16.2",
+    "mongoose": "4.12.3"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
+    "mocha": "4.0.1",
+    "sinon": "4.0.1",
+    "sinon-chai": "2.14.0",
+    "sinon-mongoose": "2.0.2"
+  },
+  "engines": {
+    "node": "7.9.0"
+  }
+}

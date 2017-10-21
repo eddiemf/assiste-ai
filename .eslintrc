@@ -1,0 +1,12 @@
+{
+  "extends": ["airbnb-base"],
+  "rules": {
+    "func-names": ["error", "never"],
+    "no-underscore-dangle": [2, { "allow": ["_id", "__express"] }],
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  }
+}
