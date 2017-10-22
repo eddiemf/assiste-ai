@@ -6,5 +6,5 @@ const routes = require('./routes');
 
 const app = express();
 
-app.use(routes);
+app.use('/api', routes);
 app.listen(config.express.port, config.express.ip);
