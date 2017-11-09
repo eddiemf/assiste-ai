@@ -1,24 +1,23 @@
 <template>
   <v-app dark>
     <v-container>
-      <TheHeader></TheHeader>
-      <HomePage></HomePage>
+      <TheHeader />
       <router-view></router-view>
-      <TheLoginDialog />
     </v-container>
+    <TheAuthDialog />
   </v-app>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader';
-import TheLoginDialog from './components/TheLoginDialog';
+import TheAuthDialog from './components/TheAuthDialog';
 import HomePage from './views/HomePage';
 
 export default {
   components: {
     TheHeader,
     HomePage,
-    TheLoginDialog,
+    TheAuthDialog,
   },
   data() {
     return {
