@@ -20,8 +20,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'user',
   },
+  ratings: [],
+  favoriteMovies: [],
+  watchLater: [],
 });
 
+/**
+ * Hashes the user password with bcrypt before saving it
+ */
 UserSchema.pre('save', function (next) {
   const user = this;
 
@@ -36,6 +42,9 @@ UserSchema.pre('save', function (next) {
   }).catch(err => next(err));
 });
 
+/**
+ * Makes a pretty error message when the e-mail is not unique
+ */
 UserSchema.post('save', (error, doc, next) => {
   if (error.name === 'MongoError' && error.code === 11000) {
     next({
@@ -53,6 +62,11 @@ UserSchema.post('save', (error, doc, next) => {
 });
 
 UserSchema.methods = {
+  /**
+   * Compares the user hashed password with the given string password
+   * @param  {String} password Password to be compared
+   * @return {Promise}          Returns a promise with the result of the comparison
+   */
   comparePassword(password) {
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, this.password)
