@@ -4,10 +4,11 @@ const user = (state = {}, action) => {
   switch (action.type) {
     case types.LOGIN:
       return {
-        name: action.name,
-        email: action.email,
-        picture: action.picture,
+        ...action.user,
       };
+
+    case types.LOGOUT:
+      return {};
     default:
       return state;
   }

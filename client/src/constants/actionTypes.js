@@ -3,3 +3,4 @@ export const ADD_MOVIE = 'ADD_MOVIE';
 
 // User
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
