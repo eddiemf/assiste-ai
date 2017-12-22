@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+/* eslint-disable */
 class App extends Component {
   render() {
     return (
