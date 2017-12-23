@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import { LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER } from '../constants/actionTypes';
 import { createReducer } from '../utils';
 
-const initialState = {
+export const initialState = {
   token: null,
   userName: null,
   userPicture: null,

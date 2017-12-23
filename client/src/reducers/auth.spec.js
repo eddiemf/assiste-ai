@@ -1,20 +1,20 @@
 import jwt from 'jsonwebtoken';
 import deepfreeze from 'deep-freeze';
-import auth from './auth';
+import auth, { initialState } from './auth';
 import * as actions from '../actions/auth';
 import * as types from '../constants/actionTypes';
 
 describe('Auth reducer', () => {
-  const initialState = {
-    token: null,
-    userName: null,
-    userPicture: null,
-    isAuthenticated: false,
-    isAuthenticating: false,
-    statusText: null,
-  };
-
-  deepfreeze(initialState);
+  it('should match the initial state', () => {
+    expect(initialState).toMatchObject({
+      token: null,
+      userName: null,
+      userPicture: null,
+      isAuthenticated: false,
+      isAuthenticating: false,
+      statusText: null,
+    });
+  });
 
   it('should handle the login request', () => {
     const state = { ...initialState };
