@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import user from './user';
+import auth from './auth';
 import movies from './movies';
 
 const assisteAi = combineReducers({
-  user,
+  auth,
   movies,
 });
 
