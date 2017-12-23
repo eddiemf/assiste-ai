@@ -6,15 +6,22 @@ const User = mongoose.model('user');
 
 exports.store = (req, res) => {
   const { name, email, password } = req.body;
-  res.status(500).json('akjsnd');
 
   User.create({ name, email, password })
     .then((user) => {
       const token = jwt.sign({
         id: user.id,
         type: user.type,
+        userName: user.name,
+        userPicture: null,
       }, config.app.secret, { expiresIn: '24h' });
 
-      res.json({ token });
-    }).catch(err => res.json(err));
+      res.json({
+        data: {
+          type: 'authentication_token',
+          attributes: { token },
+        },
+      });
+    })
+    .catch(() => res.status(500));
 };
