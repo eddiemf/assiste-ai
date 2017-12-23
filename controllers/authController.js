@@ -15,6 +15,7 @@ exports.login = (req, res) => {
         details: 'You have entered an invalid e-mail address or password.',
       }],
     });
+    return;
   }
 
   findUser

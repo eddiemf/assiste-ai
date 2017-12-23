@@ -17,11 +17,13 @@ export const login = (email, password) => dispatch => callApi(ENDPOINTS.login, {
   method: 'post',
   data: { email, password },
 }).then(({ data }) => data)
-  .then(({ token }) => {
-    if (token) {
-      return dispatch(loginUserSuccess(token));
+  .then((response) => {
+    if (response.errors) {
+      return dispatch(loginUserFailure());
     }
 
-    return dispatch(loginUserFailure());
+    const { token } = response.data.attributes;
+
+    return dispatch(loginUserSuccess(token));
   })
   .catch(() => dispatch(loginUserFailure()));
