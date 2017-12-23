@@ -6,42 +6,50 @@ const User = mongoose.model('user');
 
 exports.login = (req, res) => {
   const { email, password } = req.body;
+  const findUser = User.findOne({ email });
 
-  setTimeout(() => {
-    res.status(200).json({ token: 'akjsnd' });
-  }, 2000);
-  return;
+  if (!email || !password) {
+    res.json({
+      errors: [{
+        title: 'Invalid e-mail or password.',
+        details: 'You have entered an invalid e-mail address or password.',
+      }],
+    });
+  }
 
-  User.findOne({ email }).then((user) => {
-    if (!user) {
-      res.json({
-        errors: {
-          user: {
-            message: 'Invalid e-mail or password.',
-          },
-        },
+  findUser
+    .then((user) => {
+      if (user) return user.comparePassword(password);
+
+      return res.json({
+        errors: [{
+          title: 'E-mail not found.',
+          details: 'The e-mail you provided does not match any user.',
+        }],
       });
-      return;
-    }
-
-    user.comparePassword(password).then((matched) => {
+    })
+    .then((matched) => {
       if (!matched) {
-        res.json({
-          errors: {
-            user: {
-              message: 'Invalid e-mail or password.',
-            },
-          },
+        return res.json({
+          errors: [{
+            title: 'Wrong password.',
+            details: 'The password you entered does not match the e-mail provided.',
+          }],
         });
-        return;
       }
 
+      const user = findUser.value();
       const token = jwt.sign({
         id: user.id,
         type: user.type,
       }, config.app.secret, { expiresIn: '24h' });
 
-      res.json(200, { token });
-    }).catch(err => res.status(500).json(err));
-  }).catch(err => res.status(500).json(err));
+      return res.json({
+        data: {
+          type: 'authentication_token',
+          attributes: { token },
+        },
+      });
+    })
+    .catch(() => res.status(500));
 };
