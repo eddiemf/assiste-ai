@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 /* eslint-disable */
 class App extends Component {
   render() {
+    const { auth } = this.props;
+    console.log(auth);
+
     return (
       <div className="container">
         <header className="App-header">
