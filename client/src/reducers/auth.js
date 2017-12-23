@@ -28,12 +28,12 @@ export default createReducer(initialState, {
     statusText: 'Autenticado com sucesso!',
   }),
 
-  [LOGIN_USER_FAILURE]: state => ({
+  [LOGIN_USER_FAILURE]: (state, payload) => ({
     ...state,
     token: null,
     isAuthenticated: false,
     isAuthenticating: false,
-    statusText: 'Erro ao autenticar.',
+    statusText: payload.details || 'Algo deu errado ao tentar fazer login.',
   }),
 
   [LOGOUT_USER]: state => ({
