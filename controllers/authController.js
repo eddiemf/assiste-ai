@@ -6,7 +6,6 @@ const User = mongoose.model('user');
 
 exports.login = (req, res) => {
   const { email, password } = req.body;
-  const findUser = User.findOne({ email });
 
   if (!email || !password) {
     res.json({
@@ -17,6 +16,8 @@ exports.login = (req, res) => {
     });
     return;
   }
+
+  const findUser = User.findOne({ email }).exec();
 
   findUser
     .then((user) => {
@@ -31,21 +32,22 @@ exports.login = (req, res) => {
     })
     .then((matched) => {
       if (!matched) {
-        return res.json({
+        res.json({
           errors: [{
             title: 'Wrong password.',
             details: 'The password you entered does not match the e-mail provided.',
           }],
         });
+        return;
       }
 
-      const user = findUser.value();
+      const user = findUser;
       const token = jwt.sign({
         id: user.id,
         type: user.type,
       }, config.app.secret, { expiresIn: '24h' });
 
-      return res.json({
+      res.json({
         data: {
           type: 'authentication_token',
           attributes: { token },
