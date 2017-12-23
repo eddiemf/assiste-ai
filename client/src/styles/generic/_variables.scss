@@ -3,10 +3,10 @@
 // the $font-size-base is set for some mixins not to break
 
 // Brand colors
-$brand-primary: #13c75f;
+$brand-primary: #919191;
 $brand-darken: #10a54f;
 $brand-cta: #1bdf61;
-$brand-active: #009bdb;
+$brand-active: #42c5ec;
 
 // Errors
 $error-primary: #ff0000;
@@ -14,7 +14,7 @@ $error-hover: #c40000;
 $error-pressed: #9e0000;
 
 // Typography
-$font-family-base: 'Montserrat', sans-serif;
+$font-family-base: 'Raleway', sans-serif;
 $font-size-base: 14px;
 $text-primary: #ededed;
 $text-secondary: #d1d1d1;
@@ -24,7 +24,6 @@ $text-darker: #3a3a3a;
 // Background
 $bg-primary: #13c75f;
 $bg-light: #ededed;
-$bg-lighter: #f7f7f7;
 $bg-secondary: #d1d1d1;
 $bg-dark: #686868;
 $bg-darker: #3a3a3a;

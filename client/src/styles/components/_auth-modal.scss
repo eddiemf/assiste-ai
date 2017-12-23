@@ -1,0 +1,81 @@
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 400ms, opacity 400ms;
+
+  &.auth-modal_is-opened {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.auth-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(#000, .8);
+}
+
+.auth-modal__inner {
+  position: relative;
+  width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.auth-modal__header {
+  padding: 20px;
+  border-bottom: 1px solid $brand-primary;
+}
+
+.auth-modal__login-section {
+  padding: 20px;
+  color: $brand-primary;
+
+  h1 {
+    font-weight: normal;
+    font-size: 20px;
+  }
+}
+
+.auth-modal__login-section-header {
+  text-align: center;
+}
+
+.auth-modal__login-footer {
+  display: flex;
+  margin-top: 30px;
+}
+
+.auth-modal__skip-login {
+  margin-left: auto;
+  font-size: 14px;
+  color: $text-dark;
+  border: 0;
+  background-color: transparent;
+  outline: 0;
+  cursor: pointer;
+  transition: color 200ms;
+
+  &:hover,
+  &:focus {
+    color: #000;
+  }
+}
+
+.auth-modal__register-section {
+  display: none;
+}
