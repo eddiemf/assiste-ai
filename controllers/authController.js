@@ -4,7 +4,7 @@ const config = require('../config');
 
 const User = mongoose.model('user');
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -17,44 +17,45 @@ exports.login = (req, res) => {
     return;
   }
 
-  const findUser = User.findOne({ email }).exec();
+  try {
+    const user = await User.findOne({ email });
 
-  findUser
-    .then((user) => {
-      if (user) return user.comparePassword(password);
-
-      return res.json({
+    if (!user) {
+      res.json({
         errors: [{
           title: 'E-mail not found.',
           details: 'The e-mail you provided does not match any user.',
         }],
       });
-    })
-    .then((matched) => {
-      if (!matched) {
-        res.json({
-          errors: [{
-            title: 'Wrong password.',
-            details: 'The password you entered does not match the e-mail provided.',
-          }],
-        });
-        return;
-      }
+      return;
+    }
 
-      const user = findUser;
-      const token = jwt.sign({
-        id: user.id,
-        type: user.type,
-        userName: user.name,
-        userPicture: null,
-      }, config.app.secret, { expiresIn: '24h' });
+    const matched = await user.comparePassword(password);
 
+    if (!matched) {
       res.json({
-        data: {
-          type: 'authentication_token',
-          attributes: { token },
-        },
+        errors: [{
+          title: 'Wrong password.',
+          details: 'The password you entered does not match the e-mail provided.',
+        }],
       });
-    })
-    .catch(() => res.status(500));
+      return;
+    }
+
+    const token = jwt.sign({
+      id: user.id,
+      type: user.type,
+      userName: user.name,
+      userPicture: null,
+    }, config.app.secret, { expiresIn: '24h' });
+
+    res.json({
+      data: {
+        type: 'authentication_token',
+        attributes: { token },
+      },
+    });
+  } catch (err) {
+    res.status(500);
+  }
 };
