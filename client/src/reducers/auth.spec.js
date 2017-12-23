@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import deepfreeze from 'deep-freeze';
 import auth, { initialState } from './auth';
 import * as actions from '../actions/auth';
-import * as types from '../constants/actionTypes';
 
 describe('Auth reducer', () => {
   it('should match the initial state', () => {
@@ -52,9 +51,24 @@ describe('Auth reducer', () => {
     });
   });
 
+  it('should set the user authentication token to the localStorage when logging in', () => {
+    const payload = {
+      userName: 'John',
+      userPicture: 'https://www.google.com/',
+    };
+    const token = jwt.sign(payload, '123');
+    const action = actions.loginUserSuccess(token);
+
+    auth({}, action);
+
+    expect(localStorage.setItem).toHaveBeenLastCalledWith('token', token);
+    expect(localStorage.__STORE__.token).toBe(token);
+    expect(Object.keys(localStorage.__STORE__).length).toBe(1);
+  });
+
   it('should handle the login failure', () => {
     const state = { ...initialState, token: 'Random token' };
-    const action = actions.loginUserFailure();
+    const action = actions.loginUserFailure({ details: 'The user login has failed.' });
 
     deepfreeze(state);
     deepfreeze(action);
@@ -64,7 +78,7 @@ describe('Auth reducer', () => {
       token: null,
       isAuthenticated: false,
       isAuthenticating: false,
-      statusText: 'Erro ao autenticar.',
+      statusText: 'The user login has failed.',
     });
   });
 
