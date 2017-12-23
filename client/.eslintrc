@@ -3,8 +3,10 @@
   "rules": {
     "func-names": ["error", "never"],
   },
+  "globals": {
+    "expect": true
+  },
   "env": {
-    "browser": true,
-    "expect": true,
+    "browser": true
   }
 }
