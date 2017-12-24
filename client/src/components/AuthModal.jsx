@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 import logo from '../images/logo-inverse.svg';
 
 const propTypes = {
   login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
   }).isRequired,
@@ -21,6 +23,7 @@ class AuthModal extends Component {
 
     this.hide = this.hide.bind(this);
     this.switchToRegister = this.switchToRegister.bind(this);
+    this.switchToLogin = this.switchToLogin.bind(this);
   }
 
   componentWillMount() {
@@ -34,6 +37,10 @@ class AuthModal extends Component {
 
   switchToRegister() {
     this.setState({ isInSignUp: true });
+  }
+
+  switchToLogin() {
+    this.setState({ isInSignUp: false });
   }
 
   render() {
@@ -57,8 +64,8 @@ class AuthModal extends Component {
             <img src={logo} alt="Logotipo" />
           </div>
 
-          <div className="auth-modal__login-section">
-            <div className="auth-modal__login-section-header">
+          <div className={`auth-modal__form-section${isInSignUp ? ' auth-modal__form-section_is-hidden' : ''}`}>
+            <div className="auth-modal__form-section-header">
               <h1>Faça login pela sua plataforma favorita</h1>
 
               <div className="auth-modal__login-options">
@@ -72,13 +79,17 @@ class AuthModal extends Component {
 
             <LoginForm login={this.props.login} onRegisterClick={this.switchToRegister} />
 
-            <div className="auth-modal__login-footer">
+            <div className="auth-modal__form-section-footer">
               <button className="auth-modal__skip-login">Continuar sem fazer login</button>
             </div>
           </div>
 
-          <div className={`auth-modal__register-section${isInSignUp ? ' auth-modal__is-visible' : ''}`}>
-            Register form
+          <div className={`auth-modal__form-section auth-modal__register-section${isInSignUp ? ' auth-modal__register-section_is-visible' : ''}`}>
+            <div className="auth-modal__form-section-header">
+              <h1>Preencha os campos abaixo para realizar seu cadastro</h1>
+            </div>
+            <RegisterForm register={this.props.register} />
+            <button className="button" type="button" onClick={this.switchToLogin}>Voltar</button>
           </div>
         </div>
       </div>

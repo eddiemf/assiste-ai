@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  login: PropTypes.func.isRequired,
-  onRegisterClick: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      name: '',
       email: '',
       password: '',
     };
@@ -26,13 +26,22 @@ class LoginForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { email, password } = this.state;
-    this.props.login(email, password);
+    const { name, email, password } = this.state;
+    this.props.register(name, email, password);
   }
 
   render() {
     return (
       <form className="base-form" onSubmit={this.handleSubmit}>
+        <div className="base-form__control">
+          <input
+            className="base-input base-input_full-width"
+            type="text"
+            name="name"
+            placeholder="Nome"
+            onChange={this.handleChange}
+          />
+        </div>
         <div className="base-form__control">
           <input
             className="base-input base-input_full-width"
@@ -51,19 +60,12 @@ class LoginForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <input className="button" type="submit" value="Entrar" />
-        <button
-          className="button"
-          type="button"
-          onClick={this.props.onRegisterClick}
-        >
-          Registrar-se
-        </button>
+        <input className="button" type="submit" value="Confirmar" />
       </form>
     );
   }
 }
 
-LoginForm.propTypes = propTypes;
+RegisterForm.propTypes = propTypes;
 
-export default LoginForm;
+export default RegisterForm;
