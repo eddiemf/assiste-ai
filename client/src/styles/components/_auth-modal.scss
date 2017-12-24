@@ -41,21 +41,25 @@
   border-bottom: 1px solid $brand-primary;
 }
 
-.auth-modal__login-section {
+.auth-modal__form-section {
   padding: 20px;
   color: $brand-primary;
 
+  &.auth-modal__form-section_is-hidden {
+    display: none;
+  }
+
   h1 {
     font-weight: normal;
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
-.auth-modal__login-section-header {
+.auth-modal__form-section-header {
   text-align: center;
 }
 
-.auth-modal__login-footer {
+.auth-modal__form-section-footer {
   display: flex;
   margin-top: 30px;
 }
@@ -78,4 +82,8 @@
 
 .auth-modal__register-section {
   display: none;
+
+  &.auth-modal__register-section_is-visible {
+    display: block;
+  }
 }
