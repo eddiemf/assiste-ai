@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import AppHeader from '../components/AppHeader';
 import auth from '../reducers/auth';
 import {
-  login,
-  loginUserRequest,
-  loginUserFailure,
-  loginUserSuccess,
   logout,
 } from '../actions/auth';
 
@@ -17,10 +13,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  login,
-  loginUserRequest,
-  loginUserFailure,
-  loginUserSuccess,
   logout,
 };
 
