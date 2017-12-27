@@ -4,11 +4,11 @@ import { createReducer } from '../utils';
 
 export const initialState = {
   token: null,
-  userName: null,
-  userPicture: null,
+  userName: '',
+  userPicture: '',
   isAuthenticated: false,
   isAuthenticating: false,
-  statusText: null,
+  statusText: '',
 };
 
 export default createReducer(initialState, {
@@ -39,9 +39,9 @@ export default createReducer(initialState, {
   [LOGOUT_USER]: state => ({
     ...state,
     token: null,
-    userName: null,
-    userPicture: null,
+    userName: '',
+    userPicture: '',
     isAuthenticated: false,
-    statusText: null,
+    statusText: '',
   }),
 });
