@@ -1,8 +1,11 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import MoviesPage from '../containers/MoviesPage';
-// import NewRatingPage from '../containers/NewRatingPage';
+import NewRatingPage from '../containers/NewRatingPage';
 
 export default (
-  <Route path="/" component={MoviesPage} />
+  <Switch>
+    <Route path="/" exact component={MoviesPage} />
+    <Route path="/nova-avaliacao" component={NewRatingPage} />
+  </Switch>
 );
