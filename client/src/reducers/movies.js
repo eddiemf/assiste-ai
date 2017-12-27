@@ -1,18 +1,16 @@
-import * as types from '../constants/actionTypes';
+import { SET_MOVIES } from '../constants/actionTypes';
+import { createReducer } from '../utils';
 
-const movies = (state = [], action) => {
-  switch (action.type) {
-    case types.ADD_MOVIE:
-      return [
-        ...state,
-        {
-          id: action.id,
-          title: action.title,
-        },
-      ];
-    default:
-      return state;
-  }
-};
+export default createReducer([], {
+  [SET_MOVIES]: (state, payload) => payload.map(movie => ({
+    ...state,
+    id: movie._id,
+    title: movie.title,
+    overview: movie.overview,
+    releaseDate: movie.releaseDate,
+    categories: movie.categories,
+    IMDBLink: movie.IMDBLink,
+    images: movie.images,
+  })),
+});
 
-export default movies;

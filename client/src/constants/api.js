@@ -3,4 +3,5 @@ export const ENDPOINTS = {
   login: '/login',
   logout: '/logout',
   users: '/users',
+  movies: '/movies',
 };

@@ -1,5 +1,5 @@
 // Movies
-export const ADD_MOVIE = 'ADD_MOVIE';
+export const SET_MOVIES = 'SET_MOVIES';
 
 // Authentication
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST';
