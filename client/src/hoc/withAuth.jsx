@@ -1,6 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../actions/auth';
+import {
+  showAuthModal,
+  hideAuthModal,
+  showSignUpForm,
+  loginUserRequest,
+  loginUserSuccess,
+  loginUserFailure,
+  login,
+  register,
+  logout,
+} from '../actions/auth';
 
 const withAuth = (InnerComponent) => {
   const WithAuthComponent = props => <InnerComponent {...props} />;
@@ -10,6 +20,14 @@ const withAuth = (InnerComponent) => {
   });
 
   return connect(mapStateToProps, {
+    showAuthModal,
+    hideAuthModal,
+    showSignUpForm,
+    loginUserRequest,
+    loginUserSuccess,
+    loginUserFailure,
+    login,
+    register,
     logout,
   })(WithAuthComponent);
 };
