@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import AppHeader from '../components/AppHeader';
 import HomePage from '../containers/HomePage';
+import AuthModal from '../components/AuthModal';
 
 export default (
-  <Switch>
-    <Route path="/" exact component={HomePage} />
-  </Switch>
+  <Fragment>
+    <AppHeader />
+    <Switch>
+      <Route path="/" exact component={HomePage} />
+    </Switch>
+    <AuthModal />
+  </Fragment>
 );
