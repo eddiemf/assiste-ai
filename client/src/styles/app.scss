@@ -10,6 +10,7 @@
 // Helpers
 @import "helpers/typography";
 @import "helpers/spacing";
+@import "helpers/material-design-icons";
 
 // Layout components
 @import "layout/container";
@@ -21,3 +22,4 @@
 @import "components/base-input";
 @import "components/button";
 @import "components/auth-modal";
+@import "components/login-form";
