@@ -8,7 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import routes from './routes';
 import reducer from './reducers';
-import { loginUserSuccess } from './actions/auth';
+import { loginUserSuccess, showAuthModal } from './actions/auth';
 import './styles/app.scss';
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -16,6 +16,8 @@ const token = localStorage.getItem('token');
 
 if (token !== null) {
   store.dispatch(loginUserSuccess(token));
+} else {
+  store.dispatch(showAuthModal());
 }
 
 render(
