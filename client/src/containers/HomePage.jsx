@@ -1,13 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import AppHeader from '../components/AppHeader';
 import MoviesListContainer from './MoviesListContainer';
 
-const HomePage = () => (
-  <Fragment>
-    <AppHeader />
-    <MoviesListContainer />
-  </Fragment>
-);
+const HomePage = () => <MoviesListContainer />;
 
 export default withRouter(HomePage);

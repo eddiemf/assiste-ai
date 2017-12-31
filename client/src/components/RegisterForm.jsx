@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 const propTypes = {
   register: PropTypes.func.isRequired,
+  showAuthModal: PropTypes.func.isRequired,
+  signUpFormIsVisible: PropTypes.bool.isRequired,
 };
 
 class RegisterForm extends Component {
@@ -17,6 +22,19 @@ class RegisterForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.nameInput.focus();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.signUpFormIsVisible) {
+      // this.nameInput.focus();
+      setTimeout(() => {
+        this.nameInput.focus();
+      }, 100);
+    }
   }
 
   handleChange(event) {
@@ -34,33 +52,34 @@ class RegisterForm extends Component {
     return (
       <form className="base-form" onSubmit={this.handleSubmit}>
         <div className="base-form__control">
-          <input
-            className="base-input base-input_full-width"
-            type="text"
+          <TextField
+            ref={(input) => { this.nameInput = input; }}
+            fullWidth
             name="name"
             placeholder="Nome"
             onChange={this.handleChange}
           />
         </div>
         <div className="base-form__control">
-          <input
-            className="base-input base-input_full-width"
-            type="text"
+          <TextField
+            fullWidth
+            type="email"
             name="email"
             placeholder="E-mail"
             onChange={this.handleChange}
           />
         </div>
         <div className="base-form__control">
-          <input
-            className="base-input base-input_full-width"
+          <TextField
+            fullWidth
             type="password"
             name="password"
             placeholder="Senha"
             onChange={this.handleChange}
           />
         </div>
-        <input className="button" type="submit" value="Confirmar" />
+        <RaisedButton className="mr-4" type="submit" label="Confirmar" />
+        <FlatButton label="Fazer login" onClick={this.props.showAuthModal} />
       </form>
     );
   }
