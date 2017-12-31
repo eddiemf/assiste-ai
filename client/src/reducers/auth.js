@@ -17,25 +17,26 @@ export const initialState = {
   isAuthenticated: false,
   isAuthenticating: false,
   statusText: '',
-  showAuthModal: false,
-  showSignUpForm: false,
+  authModalIsVisible: false,
+  signUpFormIsVisible: false,
 };
 
 export default createReducer(initialState, {
   [SHOW_AUTH_MODAL]: state => ({
     ...state,
-    showAuthModal: true,
+    authModalIsVisible: true,
+    signUpFormIsVisible: false,
   }),
 
   [SHOW_SIGN_UP_FORM]: state => ({
     ...state,
-    showAuthModal: true,
-    showSignUpForm: true,
+    authModalIsVisible: true,
+    signUpFormIsVisible: true,
   }),
 
   [HIDE_AUTH_MODAL]: state => ({
     ...state,
-    showAuthModal: false,
+    authModalIsVisible: false,
   }),
 
   [LOGIN_USER_REQUEST]: state => ({
@@ -48,7 +49,7 @@ export default createReducer(initialState, {
     ...state,
     token: payload.token,
     userName: jwtDecode(payload.token).userName,
-    userPicture: jwtDecode(payload.token).userPicture,
+    userPicture: jwtDecode(payload.token).userPicture || '',
     isAuthenticated: true,
     isAuthenticating: false,
     statusText: 'Autenticado com sucesso!',

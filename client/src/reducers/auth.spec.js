@@ -14,7 +14,7 @@ describe('Auth reducer', () => {
       isAuthenticated: false,
       isAuthenticating: false,
       statusText: '',
-      showAuthModal: false,
+      authModalIsVisible: false,
       showSignUpForm: false,
     });
   });
@@ -33,7 +33,7 @@ describe('Auth reducer', () => {
   });
 
   it('should handle the auth modal opening', () => {
-    const state = { ...initialState, showAuthModal: false };
+    const state = { ...initialState, authModalIsVisible: false };
     const action = actions.showAuthModal();
 
     deepfreeze(state);
@@ -41,12 +41,12 @@ describe('Auth reducer', () => {
 
     expect(auth(state, action)).toMatchObject({
       ...state,
-      showAuthModal: true,
+      authModalIsVisible: true,
     });
   });
 
   it('should handle the auth modal hiding', () => {
-    const state = { ...initialState, showAuthModal: true };
+    const state = { ...initialState, authModalIsVisible: true };
     const action = actions.hideAuthModal();
 
     deepfreeze(state);
@@ -54,12 +54,12 @@ describe('Auth reducer', () => {
 
     expect(auth(state, action)).toMatchObject({
       ...state,
-      showAuthModal: false,
+      authModalIsVisible: false,
     });
   });
 
   it('should handle the auth modal opening in the signup form', () => {
-    const state = { ...initialState, showAuthModal: false, showSignUpForm: false };
+    const state = { ...initialState, authModalIsVisible: false, showSignUpForm: false };
     const action = actions.showSignUpForm();
 
     deepfreeze(state);
@@ -67,7 +67,7 @@ describe('Auth reducer', () => {
 
     expect(auth(state, action)).toMatchObject({
       ...state,
-      showAuthModal: true,
+      authModalIsVisible: true,
       showSignUpForm: true,
     });
   });

@@ -37,19 +37,23 @@ export const logout = () => {
   return { type: LOGOUT_USER };
 };
 
-export const login = (email, password) => dispatch => callApi(ENDPOINTS.login, {
-  method: 'post',
-  data: { email, password },
-}).then(({ data }) => data)
-  .then((response) => {
-    if (response.errors) {
-      return dispatch(loginUserFailure(response.errors));
-    }
+export const login = (email, password) => (dispatch) => {
+  dispatch(loginUserRequest());
 
-    const { token } = response.data.attributes;
-    return dispatch(loginUserSuccess(token));
-  })
-  .catch(error => dispatch(loginUserFailure(error)));
+  callApi(ENDPOINTS.login, {
+    method: 'post',
+    data: { email, password },
+  }).then(({ data }) => data)
+    .then((response) => {
+      if (response.errors) {
+        return dispatch(loginUserFailure(response.errors));
+      }
+
+      const { token } = response.data.attributes;
+      return dispatch(loginUserSuccess(token));
+    })
+    .catch(error => dispatch(loginUserFailure(error)));
+};
 
 export const register = (name, email, password) => dispatch => callApi(ENDPOINTS.users, {
   method: 'post',
