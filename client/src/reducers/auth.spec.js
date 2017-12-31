@@ -3,15 +3,19 @@ import deepfreeze from 'deep-freeze';
 import auth, { initialState } from './auth';
 import * as actions from '../actions/auth';
 
+deepfreeze(initialState);
+
 describe('Auth reducer', () => {
   it('should match the initial state', () => {
     expect(initialState).toMatchObject({
       token: null,
-      userName: null,
-      userPicture: null,
+      userName: '',
+      userPicture: '',
       isAuthenticated: false,
       isAuthenticating: false,
-      statusText: null,
+      statusText: '',
+      showAuthModal: false,
+      showSignUpForm: false,
     });
   });
 
@@ -25,6 +29,46 @@ describe('Auth reducer', () => {
     expect(auth(state, action)).toMatchObject({
       ...state,
       isAuthenticating: true,
+    });
+  });
+
+  it('should handle the auth modal opening', () => {
+    const state = { ...initialState, showAuthModal: false };
+    const action = actions.showAuthModal();
+
+    deepfreeze(state);
+    deepfreeze(action);
+
+    expect(auth(state, action)).toMatchObject({
+      ...state,
+      showAuthModal: true,
+    });
+  });
+
+  it('should handle the auth modal hiding', () => {
+    const state = { ...initialState, showAuthModal: true };
+    const action = actions.hideAuthModal();
+
+    deepfreeze(state);
+    deepfreeze(action);
+
+    expect(auth(state, action)).toMatchObject({
+      ...state,
+      showAuthModal: false,
+    });
+  });
+
+  it('should handle the auth modal opening in the signup form', () => {
+    const state = { ...initialState, showAuthModal: false, showSignUpForm: false };
+    const action = actions.showSignUpForm();
+
+    deepfreeze(state);
+    deepfreeze(action);
+
+    expect(auth(state, action)).toMatchObject({
+      ...state,
+      showAuthModal: true,
+      showSignUpForm: true,
     });
   });
 
@@ -99,10 +143,10 @@ describe('Auth reducer', () => {
     expect(auth(state, action)).toMatchObject({
       ...state,
       token: null,
-      userName: null,
-      userPicture: null,
+      userName: '',
+      userPicture: '',
       isAuthenticated: false,
-      statusText: null,
+      statusText: '',
     });
   });
 });

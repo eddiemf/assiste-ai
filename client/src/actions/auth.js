@@ -1,6 +1,20 @@
 import { callApi } from '../utils';
-import { LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER } from '../constants/actionTypes';
+import {
+  SHOW_AUTH_MODAL,
+  HIDE_AUTH_MODAL,
+  SHOW_SIGN_UP_FORM,
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
+  LOGOUT_USER,
+} from '../constants/actionTypes';
 import { ENDPOINTS } from '../constants/api';
+
+export const showAuthModal = () => ({ type: SHOW_AUTH_MODAL });
+
+export const hideAuthModal = () => ({ type: HIDE_AUTH_MODAL });
+
+export const showSignUpForm = () => ({ type: SHOW_SIGN_UP_FORM });
 
 export const loginUserRequest = () => ({ type: LOGIN_USER_REQUEST });
 

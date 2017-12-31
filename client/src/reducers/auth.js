@@ -1,5 +1,13 @@
 import jwtDecode from 'jwt-decode';
-import { LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER } from '../constants/actionTypes';
+import {
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAILURE,
+  LOGOUT_USER,
+  SHOW_AUTH_MODAL,
+  HIDE_AUTH_MODAL,
+  SHOW_SIGN_UP_FORM,
+} from '../constants/actionTypes';
 import { createReducer } from '../utils';
 
 export const initialState = {
@@ -9,13 +17,31 @@ export const initialState = {
   isAuthenticated: false,
   isAuthenticating: false,
   statusText: '',
+  showAuthModal: false,
+  showSignUpForm: false,
 };
 
 export default createReducer(initialState, {
+  [SHOW_AUTH_MODAL]: state => ({
+    ...state,
+    showAuthModal: true,
+  }),
+
+  [SHOW_SIGN_UP_FORM]: state => ({
+    ...state,
+    showAuthModal: true,
+    showSignUpForm: true,
+  }),
+
+  [HIDE_AUTH_MODAL]: state => ({
+    ...state,
+    showAuthModal: false,
+  }),
+
   [LOGIN_USER_REQUEST]: state => ({
     ...state,
     isAuthenticating: true,
-    statusText: null,
+    statusText: '',
   }),
 
   [LOGIN_USER_SUCCESS]: (state, payload) => ({
