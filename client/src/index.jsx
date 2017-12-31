@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import routes from './routes';
 import reducer from './reducers';
@@ -19,9 +20,11 @@ if (token !== null) {
 
 render(
   <Provider store={store}>
-    <BrowserRouter>
-      {routes}
-    </BrowserRouter>
+    <MuiThemeProvider>
+      <BrowserRouter>
+        {routes}
+      </BrowserRouter>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root'),
 );
