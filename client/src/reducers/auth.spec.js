@@ -15,7 +15,7 @@ describe('Auth reducer', () => {
       isAuthenticating: false,
       statusText: '',
       authModalIsVisible: false,
-      showSignUpForm: false,
+      signUpFormIsVisible: false,
     });
   });
 
@@ -59,7 +59,7 @@ describe('Auth reducer', () => {
   });
 
   it('should handle the auth modal opening in the signup form', () => {
-    const state = { ...initialState, authModalIsVisible: false, showSignUpForm: false };
+    const state = { ...initialState, authModalIsVisible: false, signUpFormIsVisible: false };
     const action = actions.showSignUpForm();
 
     deepfreeze(state);
@@ -68,7 +68,7 @@ describe('Auth reducer', () => {
     expect(auth(state, action)).toMatchObject({
       ...state,
       authModalIsVisible: true,
-      showSignUpForm: true,
+      signUpFormIsVisible: true,
     });
   });
 
