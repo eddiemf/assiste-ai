@@ -23,5 +23,24 @@ exports.store = (req, res) => {
         },
       });
     })
-    .catch(() => res.status(500));
+    .catch((response) => {
+      if (response.errors) {
+        const errors = Object.keys(response.errors).map(key => response.errors[key]);
+
+        res.json({
+          errors: errors.map(error => ({
+            title: error.message,
+            details: error.message,
+          })),
+        });
+        return;
+      }
+
+      res.status(500).json({
+        errors: [{
+          title: 'Something went wrong.',
+          details: 'Something went wrong while trying to register a new account. Try again later.',
+        }],
+      });
+    });
 };
