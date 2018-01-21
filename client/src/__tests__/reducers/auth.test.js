@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import deepfreeze from 'deep-freeze';
-import auth, { initialState } from './auth';
-import * as actions from '../actions/auth';
+import auth, { initialState } from '../../reducers/auth';
+import * as actions from '../../actions/auth';
 
 deepfreeze(initialState);
 
