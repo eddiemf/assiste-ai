@@ -16,26 +16,36 @@ const propTypes = {
   showSignUpForm: PropTypes.func.isRequired,
 };
 
-const AppHeaderUserNav = (props) => {
+export const AppHeaderUserNav = (props) => {
   const { isAuthenticated, userName, userPicture } = props.auth;
   const avatarPicture = userPicture ?
-    (<Avatar src={userPicture} title={userName} />) :
-    (<Avatar title={userName}>{userName[0]}</Avatar>);
+    (<Avatar id="user-avatar" src={userPicture} title={userName} />) :
+    (<Avatar id="user-letter-avatar" title={userName}>{userName.charAt(0)}</Avatar>);
 
   return (
     <nav className="app-header__user-nav">
       {isAuthenticated && (
         <Fragment>
-          <p>{userName}</p>
-          <FlatButton primary label="Logout" onClick={props.logout} />
+          <p id="user-name">{userName}</p>
+          <FlatButton id="logout-button" primary label="Logout" onClick={props.logout} />
           <div className="app-header__user-picture">{avatarPicture}</div>
         </Fragment>
       )}
 
       {!isAuthenticated && (
         <Fragment>
-          <FlatButton primary label="Fazer login" onClick={props.showAuthModal} />
-          <RaisedButton className="ml-3" label="Registrar-se" onClick={props.showSignUpForm} />
+          <FlatButton
+            id="login-button"
+            primary
+            label="Fazer login"
+            onClick={props.showAuthModal}
+          />
+          <RaisedButton
+            id="sign-up-button"
+            className="ml-3"
+            label="Registrar-se"
+            onClick={props.showSignUpForm}
+          />
         </Fragment>
       )}
     </nav>
