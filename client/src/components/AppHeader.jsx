@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../images/logo.svg';
 import background from '../images/header-bg.jpg';
-import AppHeaderUserNav from './AppHeaderUserNav';
+import UserBarContainer from '../containers/UserBarContainer';
 
 const AppHeader = () => (
   <header className="app-header" style={{ backgroundImage: `url(${background})` }}>
@@ -12,7 +12,7 @@ const AppHeader = () => (
             <img src={logo} alt="Logotipo" />
           </div>
 
-          <AppHeaderUserNav />
+          <UserBarContainer />
         </div>
       </div>
     </div>

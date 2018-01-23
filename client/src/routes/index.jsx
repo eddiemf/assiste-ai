@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AppHeader from '../components/AppHeader';
-import HomePage from '../containers/HomePage';
+import HomePage from '../pages/HomePage';
 import AuthModal from '../components/AuthModal';
 
 export default (

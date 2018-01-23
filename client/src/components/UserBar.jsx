@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import withAuth from '../hoc/withAuth';
 
 const propTypes = {
   auth: PropTypes.shape({
@@ -16,7 +15,7 @@ const propTypes = {
   showSignUpForm: PropTypes.func.isRequired,
 };
 
-export const AppHeaderUserNav = (props) => {
+const UserBar = (props) => {
   const { isAuthenticated, userName, userPicture } = props.auth;
   const avatarPicture = userPicture ?
     (<Avatar id="user-avatar" src={userPicture} title={userName} />) :
@@ -52,6 +51,6 @@ export const AppHeaderUserNav = (props) => {
   );
 };
 
-AppHeaderUserNav.propTypes = propTypes;
+UserBar.propTypes = propTypes;
 
-export default withAuth(AppHeaderUserNav);
+export default UserBar;

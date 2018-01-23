@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AppHeaderUserNav } from '../../components/AppHeaderUserNav';
+import UserBar from '../../components/UserBar';
 
 const validUserName = 'Eddie';
 const validUserPicture = 'path/to/picture.jpg';
@@ -19,12 +19,12 @@ const createComponent = (props) => {
     showSignUpForm,
   };
 
-  return shallow(<AppHeaderUserNav {...defaultProps} {...props} />);
+  return shallow(<UserBar {...defaultProps} {...props} />);
 };
 
 let component;
 
-describe('AppHeaderUserNav component', () => {
+describe('UserBar component', () => {
   describe('when there is no user logged in', () => {
     beforeEach(() => {
       const auth = {

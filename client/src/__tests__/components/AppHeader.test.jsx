@@ -1,17 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import AppHeader from '../../components/AppHeader';
-import AppHeaderUserNav from '../../components/AppHeaderUserNav';
+import UserBarContainer from '../../containers/UserBarContainer';
 
 describe('AppHeader component', () => {
   it('renders without crashing', () => {
     shallow(<AppHeader />);
   });
 
-  it('renders the AppHeaderUserNav component', () => {
+  it('renders the UserBarContainer component', () => {
     const wrapper = shallow(<AppHeader />);
     expect(wrapper.containsAllMatchingElements([
-      <AppHeaderUserNav />,
+      <UserBarContainer />,
     ])).toEqual(true);
   });
 });
