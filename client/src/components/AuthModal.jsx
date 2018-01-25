@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import FontIcon from 'material-ui/FontIcon';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import withAuth from '../hoc/withAuth';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import logo from '../images/logo-inverse.svg';
@@ -21,119 +20,96 @@ const propTypes = {
   }).isRequired,
 };
 
-class AuthModal extends Component {
-  constructor(props) {
-    super(props);
+const AuthModal = (props) => {
+  const {
+    authModalIsVisible,
+    signUpFormIsVisible,
+    isAuthenticating,
+    isAuthenticated,
+  } = props.auth;
 
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
+  return (
+    <div
+      className={`auth-modal${authModalIsVisible ? ' auth-modal_is-opened' : ''}`}
+      onKeyDown={e => e.keyCode === 27 && props.hideAuthModal()}
+      role="button"
+      tabIndex="0"
+    >
+      <div
+        className="auth-modal__overlay"
+        onClick={props.hideAuthModal}
+        onKeyDown={e => e.keyCode === 27 && props.hideAuthModal()}
+        role="button"
+        tabIndex="0"
+      />
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
+      <div className="auth-modal__inner">
+        <div className="auth-modal__header">
+          <img src={logo} alt="Logotipo" />
+        </div>
 
-  componentDidUpdate() {
-    window.addEventListener('keydown', this.handleKeyDown);
+        <div id="login-form-section" className={`auth-modal__form-section${signUpFormIsVisible ? ' auth-modal__form-section_is-hidden' : ''}`}>
+          <div className="auth-modal__form-section-header">
+            <h1>Faça login pela sua plataforma favorita</h1>
 
-    if (this.props.auth.isAuthenticated) {
-      setTimeout(() => {
-        this.props.hideAuthModal();
-      }, 500);
-    }
-  }
+            <div className="auth-modal__login-options">
+              <FloatingActionButton
+                className="mx-2"
+                backgroundColor="#3b5998"
+                title="Fazer login usando o Facebook"
+              >
+                <FontIcon className="fa fa-facebook" />
+              </FloatingActionButton>
+              <FloatingActionButton
+                className="mx-2"
+                backgroundColor="#ea4335"
+                title="Fazer login usando o Google"
+              >
+                <FontIcon className="fa fa-google" />
+              </FloatingActionButton>
+              <FloatingActionButton
+                className="mx-2"
+                backgroundColor="#333"
+                title="Fazer login usando o Github"
+              >
+                <FontIcon className="fa fa-github" />
+              </FloatingActionButton>
+            </div>
 
-  handleKeyDown(event) {
-    if (event.keyCode !== 27) return;
-    this.props.hideAuthModal();
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  render() {
-    const {
-      authModalIsVisible,
-      signUpFormIsVisible,
-      isAuthenticating,
-      isAuthenticated,
-    } = this.props.auth;
-
-    return (
-      <div className={`auth-modal${authModalIsVisible ? ' auth-modal_is-opened' : ''}`}>
-        <div
-          className="auth-modal__overlay"
-          onClick={this.props.hideAuthModal}
-          onKeyDown={this.handleKeyDown}
-          role="button"
-          tabIndex="0"
-        />
-
-        <div className="auth-modal__inner">
-          <div className="auth-modal__header">
-            <img src={logo} alt="Logotipo" />
+            <h1>ou usando sua conta do AssisteAí</h1>
           </div>
 
-          <div className={`auth-modal__form-section${signUpFormIsVisible ? ' auth-modal__form-section_is-hidden' : ''}`}>
-            <div className="auth-modal__form-section-header">
-              <h1>Faça login pela sua plataforma favorita</h1>
+          <LoginForm
+            login={props.login}
+            onRegisterClick={props.showSignUpForm}
+            authModalIsVisible={authModalIsVisible}
+            signUpFormIsVisible={signUpFormIsVisible}
+            isAuthenticating={isAuthenticating}
+            isAuthenticated={isAuthenticated}
+          />
 
-              <div className="auth-modal__login-options">
-                <FloatingActionButton
-                  className="mx-2"
-                  backgroundColor="#3b5998"
-                  title="Fazer login usando o Facebook"
-                >
-                  <FontIcon className="fa fa-facebook" />
-                </FloatingActionButton>
-                <FloatingActionButton
-                  className="mx-2"
-                  backgroundColor="#ea4335"
-                  title="Fazer login usando o Google"
-                >
-                  <FontIcon className="fa fa-google" />
-                </FloatingActionButton>
-                <FloatingActionButton
-                  className="mx-2"
-                  backgroundColor="#333"
-                  title="Fazer login usando o Github"
-                >
-                  <FontIcon className="fa fa-github" />
-                </FloatingActionButton>
-              </div>
-
-              <h1>ou usando sua conta do AssisteAí</h1>
-            </div>
-
-            <LoginForm
-              login={this.props.login}
-              onRegisterClick={this.props.showSignUpForm}
-              authModalIsVisible={authModalIsVisible}
-              signUpFormIsVisible={signUpFormIsVisible}
-              isAuthenticating={isAuthenticating}
-              isAuthenticated={isAuthenticated}
-            />
-
-            <div className="auth-modal__form-section-footer">
-              <button className="auth-modal__skip-login" onClick={this.props.hideAuthModal}>
-                Continuar sem fazer login
-              </button>
-            </div>
-          </div>
-
-          <div className={`auth-modal__form-section auth-modal__register-section${signUpFormIsVisible ? ' auth-modal__register-section_is-visible' : ''}`}>
-            <div className="auth-modal__form-section-header">
-              <h1>Preencha os campos abaixo para realizar seu cadastro</h1>
-            </div>
-            <RegisterForm
-              register={this.props.register}
-              showAuthModal={this.props.showAuthModal}
-              signUpFormIsVisible={signUpFormIsVisible}
-            />
+          <div className="auth-modal__form-section-footer">
+            <button className="auth-modal__skip-login" onClick={props.hideAuthModal}>
+              Continuar sem fazer login
+            </button>
           </div>
         </div>
+
+        <div id="sign-up-form-section" className={`auth-modal__form-section auth-modal__register-section${signUpFormIsVisible ? ' auth-modal__register-section_is-visible' : ''}`}>
+          <div className="auth-modal__form-section-header">
+            <h1>Preencha os campos abaixo para realizar seu cadastro</h1>
+          </div>
+          <RegisterForm
+            register={props.register}
+            showAuthModal={props.showAuthModal}
+            signUpFormIsVisible={signUpFormIsVisible}
+          />
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 AuthModal.propTypes = propTypes;
 
-export default withAuth(AuthModal);
+export default AuthModal;

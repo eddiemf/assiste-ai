@@ -79,11 +79,7 @@ describe('UserBar component', () => {
     });
 
     it('renders the user letter avatar with the user name as title if no picture is passed', () => {
-      const auth = {
-        userName: validUserName,
-        userPicture: '',
-        isAuthenticated: true,
-      };
+      const auth = { userName: validUserName, userPicture: '', isAuthenticated: true };
       component = createComponent({ auth });
       const userAvatar = component.find({ id: 'user-letter-avatar' });
       expect(userAvatar).toBePresent();
