@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
-import HomeView from './views/home/HomeView';
-import Header from './components/Header';
+// @flow
+import React from 'react';
 import StyledApp from './theme/base';
+import HomePage from './pages/home';
+import Header from './components/Header';
 
-class App extends Component {
-  render() {
-    return (
-      <StyledApp>
-        <Header />
-        <HomeView />
-      </StyledApp>
-    );
-  }
-}
+const App = () => (
+  <StyledApp>
+    <Header />
+    <HomePage />
+  </StyledApp>
+);
 
 export default App;

@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+// @flow
+import React from 'react';
 import { Logo, HeaderContainer } from './Header.style';
 import logo from '../../images/logo.png';
-import UserDetails from '../UserDetails/UserDetails';
+import UserDetails from '../UserDetails';
 
-export default class Header extends Component {
-  render() {
-    return (
-      <HeaderContainer>
-        <a href="#"><Logo src={logo} /></a>
-        <UserDetails />
-      </HeaderContainer>
-    )
-  }
-}
+const Header = () => (
+  <HeaderContainer>
+    <a href="#">
+      <Logo src={logo} />
+    </a>
+    <UserDetails />
+  </HeaderContainer>
+);
 
+export default Header;

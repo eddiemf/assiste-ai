@@ -1,0 +1,13 @@
+[ignore]
+registerServiceWroker.js
+
+[include]
+
+[libs]
+flow-typed
+
+[lints]
+
+[options]
+
+[strict]

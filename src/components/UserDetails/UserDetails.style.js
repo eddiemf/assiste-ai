@@ -11,8 +11,3 @@ export const Avatar = styled.img`
   margin-left: auto;
   border-radius: 8px;
 `;
-
-export default {
-  ComponentBase,
-  Avatar,
-};

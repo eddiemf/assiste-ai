@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Container from '../../theme/layout';
 
-export const HeaderContainer = Container.extend`
+export const HeaderContainer = styled(Container)`
   display: flex;
   align-items: flex-end;
   padding-top: 20px;
@@ -11,8 +11,3 @@ export const HeaderContainer = Container.extend`
 export const Logo = styled.img`
   max-width: 500px;
 `;
-
-export default {
-  Logo,
-  HeaderContainer,
-};
