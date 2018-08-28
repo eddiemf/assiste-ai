@@ -8,12 +8,27 @@ import {
   movieDetailHeight,
   moviePosterBorderRadius,
   moviePadding,
+  containerPadding,
 } from '../../theme/variables';
 
+export const MovieCardContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: ${containerPadding}px;
+  margin-left: ${-containerPadding}px;
+  margin-right: ${-containerPadding}px;
+`;
+
+export const MovieCardPlaceholder = styled.div`
+  width: calc(20% - ${movieMargin * 2}px);
+`;
+
 export const MovieCardBase = styled.article`
-  width: calc(20% - ${(movieMargin * 4) / 2}px);
+  width: calc(20% - ${movieMargin * 2}px);
   height: ${props => (props.expanded ? expandedMovieHeight : moviePosterHeight)}px;
-  margin: ${movieMargin}px;
+  margin-bottom: ${movieMargin * 2}px;
   transition: all ${baseTransitionTime}ms;
 `;
 

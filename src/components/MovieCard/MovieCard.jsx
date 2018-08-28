@@ -7,17 +7,18 @@ import {
 type Props = {
   id: number,
   title: string,
-  handleClick: () => void,
+  toggleCard: () => void,
+  closeCards: () => void,
   isOpened: boolean,
   posterSrc: string,
 };
 
 const MovieCard = ({
-  id, title, handleClick, isOpened, posterSrc,
+  id, title, toggleCard, isOpened, closeCards, posterSrc,
 }: Props) => (
   <MovieCardBase expanded={isOpened}>
     <PosterContainer>
-      <Poster src={posterSrc} onClick={handleClick}>
+      <Poster src={posterSrc} onClick={toggleCard}>
         <Title>
           {title}
           {' '}
