@@ -1,14 +1,16 @@
 // @flow
-import React, { Component } from 'react';
-import type { Node } from 'react';
-import type { Movie } from '../../types/Movie';
-import type { ItemProps } from '../../components/ItemList';
+import React, { Component, type Node } from 'react';
+import { type Movie } from '../../types/Movie';
+import { type ItemProps } from '../../components/ItemList/ItemList.types';
 import Container from '../../theme/layout';
 import { HomePageBase } from './HomePage.style';
 import MovieCard from '../../components/MovieCard';
 import NewRating from '../../components/NewRating';
 import ItemList from '../../components/ItemList';
-import { MovieCardContainer, MovieCardPlaceholder } from '../../components/MovieCard/MovieCard.style';
+import {
+  MovieCardContainer,
+  MovieCardPlaceholder,
+} from '../../components/MovieCard/MovieCard.style';
 
 type State = {
   movies: Movie[],
@@ -52,7 +54,7 @@ class HomePage extends Component<{}, State> {
     return (
       <HomePageBase>
         <Container>
-          {/* <NewRating /> */}
+          <NewRating />
 
           <MovieCardContainer>
             <ItemList items={movies} renderItem={this.renderMovieCard} />

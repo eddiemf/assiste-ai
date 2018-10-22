@@ -1,28 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react';
-import type { Node } from 'react';
-
-type Item = {
-  id: number,
-  [string]: any,
-};
-
-export type ItemProps = {
-  item: Item,
-  selectedItemId: ?$PropertyType<Item, 'id'>,
-  toggleItem: () => void,
-  resetSelectedItem: () => void,
-  selectItem: () => void,
-};
-
-type Props = {
-  items: Item[],
-  renderItem: (props: ItemProps) => Node,
-};
-
-type State = {
-  selectedItemId: ?$PropertyType<Item, 'id'>,
-};
+import { type Item, type Props, type State } from './ItemList.types';
 
 class ItemList extends Component<Props, State> {
   state = {
