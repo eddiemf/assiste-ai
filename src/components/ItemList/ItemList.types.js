@@ -19,8 +19,4 @@ export type Props = {
   renderItem: (props: ItemProps) => Node,
 };
 
-export type State = {
-  selectedItemId: ?$PropertyType<Item, 'id'>,
-};
-
 export type Test = String;
