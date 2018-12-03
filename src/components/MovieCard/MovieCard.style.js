@@ -16,7 +16,7 @@ export const MovieCardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: ${containerPadding}px;
+  padding: 0 ${containerPadding}px;
   margin-left: ${-containerPadding}px;
   margin-right: ${-containerPadding}px;
 `;

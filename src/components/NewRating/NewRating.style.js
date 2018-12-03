@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import {
   primaryDarkColor,
   movieMargin,
-  moviePadding,
   inputPaddingX,
   inputPaddingY,
   inputFontSize,
@@ -12,7 +11,7 @@ import {
 export const NewRatingBase = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: ${movieMargin}px;
+  margin-bottom: ${movieMargin * 2}px;
 `;
 
 export const AddRatingButton = styled.button`
@@ -25,32 +24,15 @@ export const AddRatingButton = styled.button`
   outline: 0;
 `;
 
-export const FormContainer = styled.div`
-  max-height: ${(props) => {
-    if (!props.visible) return 0;
-
-    if (props.showMovies) {
-      return 500;
-    }
-
-    return 100;
-  }}px;
+export const NewRatingContent = styled.div`
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
   opacity: ${props => (props.visible ? 1 : 0)};
-  position: relative;
-  ${''}
+  height: ${props => (props.visible ? 400 : 0)}px;
+  padding-top: ${props => (props.visible ? movieMargin * 2 : 0)}px;
   transition: all ${baseTransitionTime}ms;
 `;
 
-export const Form = styled.form`
-  padding: ${moviePadding}px;
-  margin-top: ${movieMargin * 2}px;
-  background-color: #ddd;
-  border-radius: 4px;
-  transition: all ${baseTransitionTime}ms;
-`;
-
-export const Input = styled.input`
+export const SearchInput = styled.input`
   display: block;
   width: 100%;
   padding: ${inputPaddingY}px ${inputPaddingX}px;
@@ -59,4 +41,10 @@ export const Input = styled.input`
   border-radius: 4px;
   border: 0;
   outline: 0;
+`;
+
+export const NewRatingMovieList = styled.div`
+  height: 340px;
+  margin-top: ${movieMargin * 2}px;
+  background-color: yellow;
 `;

@@ -8,13 +8,12 @@ type Props = {
   id: number,
   title: string,
   toggleCard: () => void,
-  closeCards: () => void,
   isOpened: boolean,
   posterSrc: string,
 };
 
 const MovieCard = ({
-  id, title, toggleCard, isOpened, closeCards, posterSrc,
+  id, title, toggleCard, isOpened, posterSrc,
 }: Props) => (
   <MovieCardBase expanded={isOpened}>
     <PosterContainer>
